@@ -66,6 +66,7 @@ def mongo_etl():
 
                 users.insert_one(mongo_doc)
             i = i + 1
+        return 'Mongo ETL Completed'
     except Exception as error:
         print("etl for mysql has error")
         print('error message: {}'.format(error))
