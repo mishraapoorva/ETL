@@ -52,6 +52,7 @@ def mongo_etl():
         client = pymongo.MongoClient(uri)
         db = client['sfl']
         users = db['users']
+        users.drop()
         # cursor = users.find({})
         # for document in cursor:
         #   print(document)
