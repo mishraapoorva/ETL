@@ -42,7 +42,7 @@ def default():
 def mongo_etl():
     try:
         print("loading csv data")
-        data = etl.fromcsv('/home/vivekaditya/Downloads/DATA.csv')
+        data = etl.fromcsv('DATA.csv')
         print("tranforming data")
         data = etl.addfield(data, 'full_name', lambda record: get_full_name(record))
         data = etl.addfield(data, 'company', lambda record: get_company_name(record))
