@@ -66,10 +66,11 @@ def mongo_etl():
                     # print(mongo_doc)
                     users.insert_one(mongo_doc)
                     #break
-        i = i + 1
+            i = i + 1
     except Exception as error:
         print("etl for mysql has error")
-    print('error message: {}'.format(error))
+        print('error message: {}'.format(error))
+        return str(error)
 
 @app.route('/mysql')
 def mysql_etl():
