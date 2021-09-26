@@ -3,6 +3,6 @@
 - Navigate to cd /assignment
 >- This module consists of the following folders/files:
 >> - etl_project - This folder provides solution for Section 1 and 2 of the given problem statement
->> - tf_serving - Thi folder provides solution for Section 3        
+>> - tf_serving - This folder provides solution for Section 3        
 >> - A Section 4.docx which has the document answering all questions.
 
