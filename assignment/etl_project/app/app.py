@@ -63,9 +63,8 @@ def mongo_etl():
                 mongo_doc = {}
                 for header, column in zip(headers, rec):
                     mongo_doc[header] = column      
-                    # print(mongo_doc)
-                    users.insert_one(mongo_doc)
-                    #break
+
+                users.insert_one(mongo_doc)
             i = i + 1
     except Exception as error:
         print("etl for mysql has error")
