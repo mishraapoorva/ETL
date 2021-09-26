@@ -3,3 +3,4 @@ Flask==2.0.1
 petl==1.7.4
 SQLAlchemy==1.4.25
 pymysql==1.0.2
+pymongo==3.12.0

@@ -3,6 +3,8 @@ import petl as etl
 from sqlalchemy import create_engine
 import sys
 import pymysql
+import pymongo
+import pprint
 
 def get_full_name(record):
     return record['first_name'] + ' ' + record['last_name']
@@ -38,8 +40,36 @@ def default():
 
 @app.route('/mongo')
 def mongo_etl():
-    print("Inside mongo", file=sys.stdout)
-    return 'Mongo ETL Completed'
+    try:
+        print("loading csv data")
+        data = etl.fromcsv('/home/vivekaditya/Downloads/DATA.csv')
+        print("tranforming data")
+        data = etl.addfield(data, 'full_name', lambda record: get_full_name(record))
+        data = etl.addfield(data, 'company', lambda record: get_company_name(record))
+        print("loading data to mongo")
+        # print(data)
+        uri = "mongodb://root:root@13.233.158.185/?authenticationDatabase=admin"
+        client = pymongo.MongoClient(uri)
+        db = client['sfl']
+        users = db['users']
+        # cursor = users.find({})
+        # for document in cursor:
+        #   print(document)
+        i = 0 
+        for rec in data:
+            if i == 0:
+                headers = rec
+            else:
+                mongo_doc = {}
+                for header, column in zip(headers, rec):
+                    mongo_doc[header] = column      
+                    # print(mongo_doc)
+                    users.insert_one(mongo_doc)
+                    #break
+        i = i + 1
+    except Exception as error:
+        print("etl for mysql has error")
+    print('error message: {}'.format(error))
 
 @app.route('/mysql')
 def mysql_etl():
